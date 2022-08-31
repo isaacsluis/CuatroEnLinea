@@ -54,41 +54,50 @@ class MainActivity : AppCompatActivity() {
         // Configuracion Rendirse
 
         binding.buttonSurrenceRed.setOnClickListener {
-            victoryRed++
-            startplay = 0
-            stardedButtons()
-            winGreen(victoryRed)
-        }
-
-        binding.buttonSurrenceGreen.setOnClickListener {
             victoryGreen++
             startplay = 0
             stardedButtons()
-            winRed(victoryGreen)
+            winGreen()
+            binding.resultGreen.text = victoryGreen.toString()
+        }
+
+        binding.buttonSurrenceGreen.setOnClickListener {
+            victoryRed++
+            startplay = 0
+            stardedButtons()
+            winRed()
+            binding.resultRed.text = victoryRed.toString()
         }
 
         // Fila 6
 
         binding.button71.setOnClickListener {
+
             if (binding.button71.isEnabled && binding.green.isEnabled) {
                 binding.button71.isEnabled = false
                 binding.green.isEnabled = false
                 binding.red.isEnabled = true
                 binding.button71.backgroundTintList = ColorStateList.valueOf(Color.GREEN)
-                evaluation71(victoryGreen)
+
+                val answer = evaluation71()
                 startplay = 0
-
-
+                if (answer == "G") {
+                    victoryGreen++
+                    binding.resultGreen.text = victoryGreen.toString()
+                }
 
             } else if (binding.button71.isEnabled && binding.red.isEnabled) {
                 binding.button71.isEnabled = false
                 binding.green.isEnabled = true
                 binding.red.isEnabled = false
                 binding.button71.backgroundTintList = ColorStateList.valueOf(Color.RED)
-                evaluation71(victoryRed)
+
+                val answer = evaluation71()
                 startplay = 0
-
-
+                if (answer == "R") {
+                    victoryRed++
+                    binding.resultRed.text = victoryRed.toString()
+                }
             }
         }
 
@@ -98,11 +107,26 @@ class MainActivity : AppCompatActivity() {
                 binding.green.isEnabled = false
                 binding.red.isEnabled = true
                 binding.button72.backgroundTintList = ColorStateList.valueOf(Color.GREEN)
+
+                val answer = evaluation72()
+                startplay = 0
+                if (answer == "G") {
+                    victoryGreen++
+                    binding.resultGreen.text = victoryGreen.toString()
+                }
+
             } else if (binding.button72.isEnabled && binding.red.isEnabled) {
                 binding.button72.isEnabled = false
                 binding.green.isEnabled = true
                 binding.red.isEnabled = false
                 binding.button72.backgroundTintList = ColorStateList.valueOf(Color.RED)
+
+                val answer = evaluation72()
+                startplay = 0
+                if (answer == "R") {
+                    victoryRed++
+                    binding.resultRed.text = victoryRed.toString()
+                }
             }
         }
 
@@ -112,11 +136,26 @@ class MainActivity : AppCompatActivity() {
                 binding.green.isEnabled = false
                 binding.red.isEnabled = true
                 binding.button73.backgroundTintList = ColorStateList.valueOf(Color.GREEN)
+
+                val answer = evaluation73()
+                startplay = 0
+                if (answer == "G") {
+                    victoryGreen++
+                    binding.resultGreen.text = victoryGreen.toString()
+                }
+
             } else if (binding.button73.isEnabled && binding.red.isEnabled) {
                 binding.button73.isEnabled = false
                 binding.green.isEnabled = true
                 binding.red.isEnabled = false
                 binding.button73.backgroundTintList = ColorStateList.valueOf(Color.RED)
+
+                val answer = evaluation73()
+                startplay = 0
+                if (answer == "R") {
+                    victoryRed++
+                    binding.resultRed.text = victoryRed.toString()
+                }
             }
         }
 
@@ -126,11 +165,25 @@ class MainActivity : AppCompatActivity() {
                 binding.green.isEnabled = false
                 binding.red.isEnabled = true
                 binding.button74.backgroundTintList = ColorStateList.valueOf(Color.GREEN)
+
+                val answer = evaluation74()
+                startplay = 0
+                if (answer == "G") {
+                    victoryGreen++
+                    binding.resultGreen.text = victoryGreen.toString()
+                }
             } else if (binding.button74.isEnabled && binding.red.isEnabled) {
                 binding.button74.isEnabled = false
                 binding.green.isEnabled = true
                 binding.red.isEnabled = false
                 binding.button74.backgroundTintList = ColorStateList.valueOf(Color.RED)
+
+                val answer = evaluation74()
+                startplay = 0
+                if (answer == "R") {
+                    victoryRed++
+                    binding.resultRed.text = victoryRed.toString()
+                }
             }
         }
 
@@ -679,7 +732,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-     fun buttonsDisabled() {
+    fun buttonsDisabled() {
 
         /*   _listBuntton.forEach{rango->
                rango.forEach{indv->
@@ -832,75 +885,419 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun winGreen(_result: Int) {
+    fun winGreen() {
         buttonsDisabled()
         binding.red.isEnabled = true
         binding.green.isEnabled = false
         binding.winGreen.text = "GANADOR"
-        binding.resultGreen.text = _result.toString()
         binding.buttonSurrenceGreen.isEnabled = false
         binding.buttonSurrenceRed.isEnabled = false
 
     }
 
-    fun winRed(_result: Int) {
+    fun winRed() {
         buttonsDisabled()
         binding.red.isEnabled = false
         binding.green.isEnabled = true
         binding.winRed.text = "GANADOR"
-        binding.resultRed.text = _result.toString()
         binding.buttonSurrenceGreen.isEnabled = false
         binding.buttonSurrenceRed.isEnabled = false
     }
 
-    fun evaluation71(_result: Int) {
-
-        var puente = _result
+    fun evaluation71(): String {
 
         if (binding.button72.backgroundTintList == ColorStateList.valueOf(Color.GREEN) &&
             binding.button73.backgroundTintList == ColorStateList.valueOf(Color.GREEN) &&
             binding.button74.backgroundTintList == ColorStateList.valueOf(Color.GREEN)
         ) {
-            winGreen(puente)
+            winGreen()
+            return "G"
 
         } else if (
             binding.button62.backgroundTintList == ColorStateList.valueOf(Color.GREEN) &&
             binding.button53.backgroundTintList == ColorStateList.valueOf(Color.GREEN) &&
             binding.button44.backgroundTintList == ColorStateList.valueOf(Color.GREEN)
         ) {
-            winGreen(puente)
+            winGreen()
+            return "G"
 
         } else if (
             binding.button61.backgroundTintList == ColorStateList.valueOf(Color.GREEN) &&
             binding.button51.backgroundTintList == ColorStateList.valueOf(Color.GREEN) &&
             binding.button41.backgroundTintList == ColorStateList.valueOf(Color.GREEN)
         ) {
-            winGreen(puente)
-        }
-
-        else if (
+            winGreen()
+            return "G"
+        } else if (
             binding.button72.backgroundTintList == ColorStateList.valueOf(Color.RED) &&
             binding.button73.backgroundTintList == ColorStateList.valueOf(Color.RED) &&
             binding.button74.backgroundTintList == ColorStateList.valueOf(Color.RED)
         ) {
-            winRed(_result)
+            winRed()
+            return "R"
 
         } else if (
             binding.button62.backgroundTintList == ColorStateList.valueOf(Color.RED) &&
             binding.button53.backgroundTintList == ColorStateList.valueOf(Color.RED) &&
             binding.button44.backgroundTintList == ColorStateList.valueOf(Color.RED)
         ) {
-            winRed(_result)
+            winRed()
+            return "R"
 
         } else if (
             binding.button61.backgroundTintList == ColorStateList.valueOf(Color.RED) &&
             binding.button51.backgroundTintList == ColorStateList.valueOf(Color.RED) &&
             binding.button41.backgroundTintList == ColorStateList.valueOf(Color.RED)
         ) {
-            winRed(_result)
+            winRed()
+            return "R"
+        } else {
+            return ""
+        }
+    }
+
+    fun evaluation72(): String {
+
+        if (binding.button71.backgroundTintList == ColorStateList.valueOf(Color.GREEN) &&
+            binding.button73.backgroundTintList == ColorStateList.valueOf(Color.GREEN) &&
+            binding.button74.backgroundTintList == ColorStateList.valueOf(Color.GREEN)
+        ) {
+            winGreen()
+            return "G"
+
+        } else if (
+            binding.button62.backgroundTintList == ColorStateList.valueOf(Color.GREEN) &&
+            binding.button52.backgroundTintList == ColorStateList.valueOf(Color.GREEN) &&
+            binding.button42.backgroundTintList == ColorStateList.valueOf(Color.GREEN)
+        ) {
+            winGreen()
+            return "G"
+
+        } else if (
+            binding.button63.backgroundTintList == ColorStateList.valueOf(Color.GREEN) &&
+            binding.button54.backgroundTintList == ColorStateList.valueOf(Color.GREEN) &&
+            binding.button45.backgroundTintList == ColorStateList.valueOf(Color.GREEN)
+        ) {
+            winGreen()
+            return "G"
+        } else if (
+            binding.button71.backgroundTintList == ColorStateList.valueOf(Color.RED) &&
+            binding.button73.backgroundTintList == ColorStateList.valueOf(Color.RED) &&
+            binding.button74.backgroundTintList == ColorStateList.valueOf(Color.RED)
+        ) {
+            winRed()
+            return "R"
+
+        } else if (
+            binding.button62.backgroundTintList == ColorStateList.valueOf(Color.RED) &&
+            binding.button52.backgroundTintList == ColorStateList.valueOf(Color.RED) &&
+            binding.button42.backgroundTintList == ColorStateList.valueOf(Color.RED)
+        ) {
+            winRed()
+            return "R"
+
+        } else if (
+            binding.button63.backgroundTintList == ColorStateList.valueOf(Color.RED) &&
+            binding.button54.backgroundTintList == ColorStateList.valueOf(Color.RED) &&
+            binding.button45.backgroundTintList == ColorStateList.valueOf(Color.RED)
+        ) {
+            winRed()
+            return "R"
+        } else {
+            return ""
+        }
+    }
+
+    fun evaluation73(): String {
+
+        if (binding.button71.backgroundTintList == ColorStateList.valueOf(Color.GREEN) &&
+            binding.button72.backgroundTintList == ColorStateList.valueOf(Color.GREEN) &&
+            binding.button74.backgroundTintList == ColorStateList.valueOf(Color.GREEN)
+        ) {
+            winGreen()
+            return "G"
+
+        } else if (
+            binding.button63.backgroundTintList == ColorStateList.valueOf(Color.GREEN) &&
+            binding.button53.backgroundTintList == ColorStateList.valueOf(Color.GREEN) &&
+            binding.button43.backgroundTintList == ColorStateList.valueOf(Color.GREEN)
+        ) {
+            winGreen()
+            return "G"
+
+        } else if (
+            binding.button64.backgroundTintList == ColorStateList.valueOf(Color.GREEN) &&
+            binding.button55.backgroundTintList == ColorStateList.valueOf(Color.GREEN) &&
+            binding.button46.backgroundTintList == ColorStateList.valueOf(Color.GREEN)
+        ) {
+            winGreen()
+            return "G"
+        } else if (
+            binding.button71.backgroundTintList == ColorStateList.valueOf(Color.RED) &&
+            binding.button72.backgroundTintList == ColorStateList.valueOf(Color.RED) &&
+            binding.button74.backgroundTintList == ColorStateList.valueOf(Color.RED)
+        ) {
+            winRed()
+            return "R"
+
+        } else if (
+            binding.button63.backgroundTintList == ColorStateList.valueOf(Color.RED) &&
+            binding.button52.backgroundTintList == ColorStateList.valueOf(Color.RED) &&
+            binding.button43.backgroundTintList == ColorStateList.valueOf(Color.RED)
+        ) {
+            winRed()
+            return "R"
+
+        } else if (
+            binding.button64.backgroundTintList == ColorStateList.valueOf(Color.RED) &&
+            binding.button55.backgroundTintList == ColorStateList.valueOf(Color.RED) &&
+            binding.button46.backgroundTintList == ColorStateList.valueOf(Color.RED)
+        ) {
+            winRed()
+            return "R"
+        } else {
+            return ""
+        }
+    }
+
+    fun evaluation74(): String {
+
+        if (binding.button71.backgroundTintList == ColorStateList.valueOf(Color.GREEN) &&
+            binding.button72.backgroundTintList == ColorStateList.valueOf(Color.GREEN) &&
+            binding.button73.backgroundTintList == ColorStateList.valueOf(Color.GREEN)
+        ) {
+            winGreen()
+            return "G"
+
+        } else if (
+            binding.button75.backgroundTintList == ColorStateList.valueOf(Color.GREEN) &&
+            binding.button76.backgroundTintList == ColorStateList.valueOf(Color.GREEN) &&
+            binding.button77.backgroundTintList == ColorStateList.valueOf(Color.GREEN)
+        ) {
+            winGreen()
+            return "G"
+
+        } else if (
+            binding.button64.backgroundTintList == ColorStateList.valueOf(Color.GREEN) &&
+            binding.button54.backgroundTintList == ColorStateList.valueOf(Color.GREEN) &&
+            binding.button44.backgroundTintList == ColorStateList.valueOf(Color.GREEN)
+        ) {
+            winGreen()
+            return "G"
+
+        } else if (
+            binding.button63.backgroundTintList == ColorStateList.valueOf(Color.GREEN) &&
+            binding.button52.backgroundTintList == ColorStateList.valueOf(Color.GREEN) &&
+            binding.button41.backgroundTintList == ColorStateList.valueOf(Color.GREEN)
+        ) {
+            winGreen()
+            return "G"
+        } else if (
+            binding.button65.backgroundTintList == ColorStateList.valueOf(Color.GREEN) &&
+            binding.button56.backgroundTintList == ColorStateList.valueOf(Color.GREEN) &&
+            binding.button47.backgroundTintList == ColorStateList.valueOf(Color.GREEN)
+        ) {
+            winGreen()
+            return "G"
+        } else if (binding.button71.backgroundTintList == ColorStateList.valueOf(Color.RED) &&
+            binding.button72.backgroundTintList == ColorStateList.valueOf(Color.RED) &&
+            binding.button73.backgroundTintList == ColorStateList.valueOf(Color.RED)
+        ) {
+            winRed()
+            return "R"
+
+        } else if (
+            binding.button75.backgroundTintList == ColorStateList.valueOf(Color.RED) &&
+            binding.button76.backgroundTintList == ColorStateList.valueOf(Color.RED) &&
+            binding.button77.backgroundTintList == ColorStateList.valueOf(Color.RED)
+        ) {
+            winRed()
+            return "R"
+
+        } else if (
+            binding.button64.backgroundTintList == ColorStateList.valueOf(Color.RED) &&
+            binding.button54.backgroundTintList == ColorStateList.valueOf(Color.RED) &&
+            binding.button44.backgroundTintList == ColorStateList.valueOf(Color.RED)
+        ) {
+            winRed()
+            return "R"
+
+        } else if (
+            binding.button63.backgroundTintList == ColorStateList.valueOf(Color.RED) &&
+            binding.button52.backgroundTintList == ColorStateList.valueOf(Color.RED) &&
+            binding.button41.backgroundTintList == ColorStateList.valueOf(Color.RED)
+        ) {
+            winRed()
+            return "R"
+        } else if (
+            binding.button65.backgroundTintList == ColorStateList.valueOf(Color.RED) &&
+            binding.button56.backgroundTintList == ColorStateList.valueOf(Color.RED) &&
+            binding.button47.backgroundTintList == ColorStateList.valueOf(Color.RED)
+        ) {
+            winRed()
+            return "R"
+        } else {
+            return ""
+        }
+    }
+
+    fun evaluation75(): String {
+
+        if (binding.button71.backgroundTintList == ColorStateList.valueOf(Color.GREEN) &&
+            binding.button73.backgroundTintList == ColorStateList.valueOf(Color.GREEN) &&
+            binding.button74.backgroundTintList == ColorStateList.valueOf(Color.GREEN)
+        ) {
+            winGreen()
+            return "G"
+
+        } else if (
+            binding.button62.backgroundTintList == ColorStateList.valueOf(Color.GREEN) &&
+            binding.button52.backgroundTintList == ColorStateList.valueOf(Color.GREEN) &&
+            binding.button42.backgroundTintList == ColorStateList.valueOf(Color.GREEN)
+        ) {
+            winGreen()
+            return "G"
+
+        } else if (
+            binding.button63.backgroundTintList == ColorStateList.valueOf(Color.GREEN) &&
+            binding.button54.backgroundTintList == ColorStateList.valueOf(Color.GREEN) &&
+            binding.button45.backgroundTintList == ColorStateList.valueOf(Color.GREEN)
+        ) {
+            winGreen()
+            return "G"
+        } else if (
+            binding.button71.backgroundTintList == ColorStateList.valueOf(Color.RED) &&
+            binding.button73.backgroundTintList == ColorStateList.valueOf(Color.RED) &&
+            binding.button74.backgroundTintList == ColorStateList.valueOf(Color.RED)
+        ) {
+            winRed()
+            return "R"
+
+        } else if (
+            binding.button62.backgroundTintList == ColorStateList.valueOf(Color.RED) &&
+            binding.button52.backgroundTintList == ColorStateList.valueOf(Color.RED) &&
+            binding.button42.backgroundTintList == ColorStateList.valueOf(Color.RED)
+        ) {
+            winRed()
+            return "R"
+
+        } else if (
+            binding.button63.backgroundTintList == ColorStateList.valueOf(Color.RED) &&
+            binding.button54.backgroundTintList == ColorStateList.valueOf(Color.RED) &&
+            binding.button45.backgroundTintList == ColorStateList.valueOf(Color.RED)
+        ) {
+            winRed()
+            return "R"
+        } else {
+            return ""
+        }
+    }
+
+    fun evaluation76(): String {
+
+        if (binding.button71.backgroundTintList == ColorStateList.valueOf(Color.GREEN) &&
+            binding.button73.backgroundTintList == ColorStateList.valueOf(Color.GREEN) &&
+            binding.button74.backgroundTintList == ColorStateList.valueOf(Color.GREEN)
+        ) {
+            winGreen()
+            return "G"
+
+        } else if (
+            binding.button62.backgroundTintList == ColorStateList.valueOf(Color.GREEN) &&
+            binding.button52.backgroundTintList == ColorStateList.valueOf(Color.GREEN) &&
+            binding.button42.backgroundTintList == ColorStateList.valueOf(Color.GREEN)
+        ) {
+            winGreen()
+            return "G"
+
+        } else if (
+            binding.button63.backgroundTintList == ColorStateList.valueOf(Color.GREEN) &&
+            binding.button54.backgroundTintList == ColorStateList.valueOf(Color.GREEN) &&
+            binding.button45.backgroundTintList == ColorStateList.valueOf(Color.GREEN)
+        ) {
+            winGreen()
+            return "G"
+        } else if (
+            binding.button71.backgroundTintList == ColorStateList.valueOf(Color.RED) &&
+            binding.button73.backgroundTintList == ColorStateList.valueOf(Color.RED) &&
+            binding.button74.backgroundTintList == ColorStateList.valueOf(Color.RED)
+        ) {
+            winRed()
+            return "R"
+
+        } else if (
+            binding.button62.backgroundTintList == ColorStateList.valueOf(Color.RED) &&
+            binding.button52.backgroundTintList == ColorStateList.valueOf(Color.RED) &&
+            binding.button42.backgroundTintList == ColorStateList.valueOf(Color.RED)
+        ) {
+            winRed()
+            return "R"
+
+        } else if (
+            binding.button63.backgroundTintList == ColorStateList.valueOf(Color.RED) &&
+            binding.button54.backgroundTintList == ColorStateList.valueOf(Color.RED) &&
+            binding.button45.backgroundTintList == ColorStateList.valueOf(Color.RED)
+        ) {
+            winRed()
+            return "R"
+        } else {
+            return ""
+        }
+    }
+
+    fun evaluation77(): String {
+
+        if (binding.button71.backgroundTintList == ColorStateList.valueOf(Color.GREEN) &&
+            binding.button73.backgroundTintList == ColorStateList.valueOf(Color.GREEN) &&
+            binding.button74.backgroundTintList == ColorStateList.valueOf(Color.GREEN)
+        ) {
+            winGreen()
+            return "G"
+
+        } else if (
+            binding.button62.backgroundTintList == ColorStateList.valueOf(Color.GREEN) &&
+            binding.button52.backgroundTintList == ColorStateList.valueOf(Color.GREEN) &&
+            binding.button42.backgroundTintList == ColorStateList.valueOf(Color.GREEN)
+        ) {
+            winGreen()
+            return "G"
+
+        } else if (
+            binding.button63.backgroundTintList == ColorStateList.valueOf(Color.GREEN) &&
+            binding.button54.backgroundTintList == ColorStateList.valueOf(Color.GREEN) &&
+            binding.button45.backgroundTintList == ColorStateList.valueOf(Color.GREEN)
+        ) {
+            winGreen()
+            return "G"
+        } else if (
+            binding.button71.backgroundTintList == ColorStateList.valueOf(Color.RED) &&
+            binding.button73.backgroundTintList == ColorStateList.valueOf(Color.RED) &&
+            binding.button74.backgroundTintList == ColorStateList.valueOf(Color.RED)
+        ) {
+            winRed()
+            return "R"
+
+        } else if (
+            binding.button62.backgroundTintList == ColorStateList.valueOf(Color.RED) &&
+            binding.button52.backgroundTintList == ColorStateList.valueOf(Color.RED) &&
+            binding.button42.backgroundTintList == ColorStateList.valueOf(Color.RED)
+        ) {
+            winRed()
+            return "R"
+
+        } else if (
+            binding.button63.backgroundTintList == ColorStateList.valueOf(Color.RED) &&
+            binding.button54.backgroundTintList == ColorStateList.valueOf(Color.RED) &&
+            binding.button45.backgroundTintList == ColorStateList.valueOf(Color.RED)
+        ) {
+            winRed()
+            return "R"
+        } else {
+            return ""
         }
     }
 }
+
 
 
 
